@@ -1,0 +1,46 @@
+services:
+    jcsrc.proxy.defaut_controller:
+        class:     JcSrc\SfProxyBundle\Controller\DefaultController
+        arguments:
+            serviceManager: "@jcsrc.proxy.service_manager"
+
+    jcsrc.proxy.service_manager:
+        class: JcSrc\SfProxyBundle\Manager\ServiceManager
+        arguments:
+            requestStack: "@request_stack"
+            httpHelper: "@jcsrc.proxy.http.helper"
+            ProxyApiManager: "@jcsrc.proxy.proxy_manager"
+            cacheProvider: "@=service(parameter('jcsrc.cache.provider.service_id'))"
+
+    jcsrc.proxy.homepage_listener:
+        class: JcSrc\SfProxyBundle\Listener\HomepageRenderListener
+        arguments:
+            serviceConverter: "@jcsrc.proxy.service_manager"
+        tags:
+            - { name: kernel.event_listener, event: homepage.render, method: onRender }
+
+    # Service classes
+    jcsrc.proxy.proxy_manager:
+        class: JcSrc\SfProxyBundle\Manager\ProxyManager
+
+    jcsrc.proxy.http.client:
+        class: GuzzleHttp\Client
+
+    jcsrc.proxy.http.helper:
+        class: JcSrc\SfProxyBundle\Helper\HttpHelper
+        arguments:
+            httpsClient: "@jcsrc.proxy.http.client"
+
+    jcsrc.proxy.proxy_model:
+        class: JcSrc\SfProxyBundle\Model\ProxyModel
+
+    # Processing steps for proxy request handling
+    jcsrc.proxy.processor.pre:
+        class: JcSrc\SfProxyBundle\Processor\PreProcessor
+
+    jcsrc.proxy.processor.proxy:
+        class: JcSrc\SfProxyBundle\Processor\ProxyProcessor
+
+    jcsrc.proxy.processor.post:
+        class: JcSrc\SfProxyBundle\Processor\PostProcessor
+

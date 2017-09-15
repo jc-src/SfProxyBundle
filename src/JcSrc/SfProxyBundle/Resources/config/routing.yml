@@ -1,0 +1,29 @@
+jcsrc_proxy_homepage:
+    path:     /
+    methods: [GET]
+    defaults: { _controller: jcsrc.proxy.defaut_controller:indexAction }
+
+jcsrc_proxy_options:
+    path:     /{client}/{service}
+    methods: [OPTIONS]
+    defaults: { _controller: jcsrc.proxy.defaut_controller:optionsAction }
+    requirements:
+        client: "[A-Za-z0-9_-]+"
+        service: ".+"
+
+jcsrc_proxy_service:
+    path:     /{client}/{service}
+    methods: [GET,POST,PATCH,HEAD,PUT]
+    defaults: { _controller: jcsrc.proxy.defaut_controller:proxyAction }
+    requirements:
+        client: "[A-Za-z0-9_-]+"
+        service: ".+"
+
+# TODO create from swagger schema output
+#jcsrc_proxy_service_schema:
+#    path:     /schema/{client}/{service}
+#    methods: [GET]
+#    defaults: { _controller: jcsrc.proxy.defaut_controller:schemaAction }
+#    requirements:
+#        client: "[A-Za-z0-9_-]+"
+#        service: ".+"
