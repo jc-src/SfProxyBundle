@@ -1,0 +1,4 @@
+services:
+#    jc_src_sf_proxy.example:
+#        class: JcSrc\SfProxyBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

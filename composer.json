@@ -1,0 +1,30 @@
+{
+  "name": "jc-src/sf-proxy-bundle",
+  "description": "Symfony proxy bundle",
+  "license": "GPL",
+  "authors": [
+    {
+      "name": "List of contributors",
+      "homepage": "https://github.com/jc-src/SfProxyBundle/graphs/contributors"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "non-feature-branches": ["master", "develop", "support/*"],
+  "require": {
+    "php": "~5.6"
+  },
+  "require-dev": {},
+
+  "autoload": {
+    "psr-4": {
+      "JcSrc\\SfProxyBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Graviton\\RqlParserBundle\\": "test/"
+    }
+  },
+  "scripts": {}
+}
