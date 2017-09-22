@@ -1,10 +1,11 @@
 <?php
 /**
- * ParamConverter class for entry point to ProxyApi Bundle
+ * ParamConverter class for entry point to Proxy Bundle
  */
 
 namespace JcSrc\SfProxyBundle\Manager;
 
+use JcSrc\ExceptionBundle\Exception\NotFoundException;
 use JcSrc\SfProxyBundle\Helper\HttpHelper;
 use JcSrc\SfProxyBundle\Listener\ProxyExceptionListener;
 use JcSrc\SfProxyBundle\Model\ProxyModel;
@@ -18,7 +19,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Service Request Converter and startup for ProxyApi
+ * Service Request Converter and startup for Proxy
  *
  * @author   List of contributors <https://github.com/jc-src/SfProxyBundle/graphs/contributors>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -93,7 +94,7 @@ class ServiceManager
         $this->reqClient  = $this->request->get('client');
         $this->reqService = $this->request->get('service');
 
-        if (!$this->reqClient || !$this->reqService) {
+        if (!$this->reqClient) {
             throw new ProxyExceptionListener(404, 'Proxy service not found');
         }
 
@@ -105,12 +106,18 @@ class ServiceManager
 
     /**
      * List all services
+     * TODO correct link
      *
      * @return array
      */
     public function getServices()
     {
-        return $this->proxyManager->getServices();
+        $services = [];
+        foreach ($this->proxyManager->getServices()['services'] as $key => $service) {
+            $services[$key] = '/'.$key;
+        }
+
+        return $services;
     }
 
     /**
@@ -130,7 +137,7 @@ class ServiceManager
         if (!$preProcessing instanceof PreProcessorInterface) {
             throw new ProxyExceptionListener(412, 'Configured PreProcessing configuration is incorrect');
         }
-        $this->httpHelper = $preProcessing->process($this->request, $this->httpHelper);
+        $this->httpHelper = $preProcessing->process($this->request, $this->httpHelper, $proxyModel);
 
         $proxyProcesor = $proxyModel->getProxyProcessorService();
         if (!$proxyProcesor instanceof ProxyProcessorInterface) {
@@ -144,7 +151,7 @@ class ServiceManager
         if (!$postProcesor instanceof PostProcessorInterface) {
             throw new ProxyExceptionListener(412, 'Configured ProxyProcessor configuration is incorrect');
         }
-        $response = $postProcesor->process($response);
+        $response = $postProcesor->process($response, $proxyModel);
 
         return $response;
     }

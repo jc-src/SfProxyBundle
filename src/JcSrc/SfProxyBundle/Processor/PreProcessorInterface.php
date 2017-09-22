@@ -4,6 +4,7 @@
  */
 namespace JcSrc\SfProxyBundle\Processor;
 
+use JcSrc\SfProxyBundle\Model\ProxyModel;
 use Symfony\Component\HttpFoundation\Request;
 use JcSrc\SfProxyBundle\Helper\HttpHelper as HttpHelper;
 
@@ -22,7 +23,8 @@ interface PreProcessorInterface
      *
      * @param Request    $originalRequest Incoming current request
      * @param HttpHelper $helper          Building the new request
+     * @param ProxyModel $proxyModel      Configuration model
      * @return HttpHelper
      */
-    public function process(Request $originalRequest, HttpHelper $helper);
+    public function process(Request $originalRequest, HttpHelper $helper, ProxyModel $proxyModel);
 }

@@ -34,18 +34,17 @@ Endpoint api `/proxy/{proxy_name}/{service}?queryparams=values`.
 
 `proxy name ` Unique ID for a service.
 `service ` Will be appended: uri + serviceEndpoint + service ->  proxy.
-`queryparams` Just an optional sample
 
 
 ##### Configuration  `description`
 
 ```
 parameters:
-    jcsrc.proxy.sources:
+    graviton.proxy_api.sources:
         proxy1:  # unique ID, called in url: proxy_name
             uri: # http full qualified domain url
-            apiKey: # optional api key, by default passed as apiKey=value in query params
-            queryStringTemplate: # optional mapping from request queryParams to proxy params
+            queryAdditionals: # optional appending params to proxy query
+            queryParams: # optional Unique params to proxy request
             serviceEndpoint: # optional append to uri on requesting data
             preProcessorService: # optional, valid service id. implement Interface for pre process request data.
             proxyProcessorService: # optional, valid service id. implement Interface for execute proxy request
@@ -57,14 +56,17 @@ parameters:
 
 ```
 parameters:
-    jcsrc.proxy.sources:
+    graviton.proxy_api.sources:
         proxy1:
             uri: 'http://gateway.proxy.com'
-            apiKey: xxCCff8723
-            queryStringTemplate: 'field1={queryParam1}'
+            queryAdditionals: 
+                appid: ap-key-id-xyz
+            queryParams:
+                name: '{city}'
             serviceEndpoint: /docs
             preProcessorService: 'valid.service.id.step.1'
             proxyProcessorService: 'valid.service.id.step.2'
             postProcessorService: 'valid.service.id.step.3'
 ```
+
 

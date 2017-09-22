@@ -91,7 +91,7 @@ class HttpHelper
         if (!array_key_exists('query', $this->options)) {
             $this->options['query'] = [];
         }
-        $this->options['query'] = [$name => $value];
+        $this->options['query'][$name] = $value;
     }
 
     /**

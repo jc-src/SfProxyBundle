@@ -33,15 +33,14 @@ class ProxyProcessor implements ProxyProcessorInterface
     ) {
         // Original Request service
         $serviceUri = $originalRequest->get('service');
+        $serviceUri = $serviceUri ? '/' . $serviceUri : '';
 
         // Append endpoint to request uri, /endpoint/
         $endpoint = $proxyModel->getServiceEndpoint();
         $uri = $endpoint ?
-            str_replace('//', '/', $endpoint . '/' . $serviceUri) :
+            str_replace('//', '/', $endpoint . $serviceUri) :
             $serviceUri;
         $httpHelper->setRequestUri($uri);
-
-        // Add certificates if set.. etc..
 
         /** @var Response $response */
         $response = $httpHelper->execute();

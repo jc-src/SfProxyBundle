@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Entry point controller.
+ */
 namespace JcSrc\SfProxyBundle\Controller;
 
 use JcSrc\SfProxyBundle\Manager\ServiceManager;

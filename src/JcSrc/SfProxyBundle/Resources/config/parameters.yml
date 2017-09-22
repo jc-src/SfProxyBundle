@@ -1,0 +1,4 @@
+# JcSrc Api Proxy Config, can be override in App Parameters
+parameters:
+    # Proxy Test endpoints. This is a Sample weather api, only London
+    jcsrc.proxy.sources: {}

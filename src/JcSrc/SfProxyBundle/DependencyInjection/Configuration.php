@@ -1,24 +1,27 @@
 <?php
-
+/**
+ * Start up interface
+ */
 namespace JcSrc\SfProxyBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This is the class that validates and merges configuration from your app/config files.
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/configuration.html}
+ * @author   List of contributors <https://github.com/jc-src/SfProxyBundle/graphs/contributors>
+ * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link     http://swisscom.ch
  */
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritdoc}
+     * Initial Configuration for sf.
+     * @return TreeBuilder
      */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('jc_src_sf_proxy');
+        $treeBuilder->root('jcsrc_proxy');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

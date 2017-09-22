@@ -9,7 +9,7 @@ services:
         arguments:
             requestStack: "@request_stack"
             httpHelper: "@jcsrc.proxy.http.helper"
-            ProxyApiManager: "@jcsrc.proxy.proxy_manager"
+            ProxyManager: "@jcsrc.proxy.proxy_manager"
             cacheProvider: "@=service(parameter('jcsrc.cache.provider.service_id'))"
 
     jcsrc.proxy.homepage_listener:

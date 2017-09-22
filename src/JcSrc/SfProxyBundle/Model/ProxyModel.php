@@ -17,21 +17,19 @@ use JcSrc\SfProxyBundle\Processor\ProxyProcessorInterface;
  */
 class ProxyModel
 {
-    protected $name;
-    protected $prefix;
-    protected $uri;
-    protected $apiKey;
-    protected $queryStringTemplate;
-    protected $serviceEndpoint;
+    protected $name = '';
+    protected $uri = '';
+    protected $serviceEndpoint = '';
+    protected $queryAdditionals = [];
+    protected $queryParams = [];
 
-    // Service processing
     /** @var PreProcessorInterface */
     protected $preProcessorService;
     protected $proxyProcessorService;
     protected $postProcessorService;
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -50,23 +48,6 @@ class ProxyModel
     /**
      * @return mixed
      */
-    public function getPrefix()
-    {
-        return $this->prefix;
-    }
-
-    /**
-     * @param mixed $prefix setter
-     * @return void
-     */
-    public function setPrefix($prefix)
-    {
-        $this->prefix = $prefix;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getUri()
     {
         return $this->uri;
@@ -79,40 +60,6 @@ class ProxyModel
     public function setUri($uri)
     {
         $this->uri = $uri;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getApiKey()
-    {
-        return $this->apiKey;
-    }
-
-    /**
-     * @param mixed $apiKey setter
-     * @return void
-     */
-    public function setApiKey($apiKey)
-    {
-        $this->apiKey = $apiKey;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQueryStringTemplate()
-    {
-        return $this->queryStringTemplate;
-    }
-
-    /**
-     * @param mixed $queryStringTemplate setter
-     * @return void
-     */
-    public function setQueryStringTemplate($queryStringTemplate)
-    {
-        $this->queryStringTemplate = $queryStringTemplate;
     }
 
     /**
@@ -187,5 +134,39 @@ class ProxyModel
     public function setPostProcessorService($postProcessorService)
     {
         $this->postProcessorService = $postProcessorService;
+    }
+
+    /**
+     * @return array
+     */
+    public function getQueryAdditionals()
+    {
+        return $this->queryAdditionals;
+    }
+
+    /**
+     * @param array $queryAdditionals Optional added query params
+     * @return void
+     */
+    public function setQueryAdditionals($queryAdditionals)
+    {
+        $this->queryAdditionals = $queryAdditionals;
+    }
+
+    /**
+     * @return array
+     */
+    public function getQueryParams()
+    {
+        return $this->queryParams;
+    }
+
+    /**
+     * @param array $queryParams Unique request params
+     * @return void
+     */
+    public function setQueryParams($queryParams)
+    {
+        $this->queryParams = $queryParams;
     }
 }
